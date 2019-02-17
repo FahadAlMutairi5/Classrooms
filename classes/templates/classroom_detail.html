@@ -11,14 +11,29 @@
 
 
     <table class="table">
-    	
+    	<tr> 
+      <th>
+        Name 
+      </th>
+      <th>
+        Date Of Birth  
+      </th>
+      <th>
+        gender 
+      </th>
+      <th>
+        Exam Grade 
+      </th>
+  </tr>
 	{% for item in items %}
-	<tr>
-      <td> name : {{item.name}} </td>
-      <td> date of birth :{{item.date_of_birth}} </td>
-      <td> GENDER :{{item.gender}} </td>
-      <td> Exam Grade : {{item.exam_grade}} </td>
+  <tr>
+      <td> {{item.name}} </td>
+      <td> {{item.date_of_birth}} </td>
+      <td> {{item.gender}} </td>
+      <td> {{item.exam_grade}} </td>
+      {% if classroom.teacher == request.user %}
       <td> <a href="{% url 'student-update' item.id classroom.id %}" class="btn" style="background-color: #000034; color: white;">Update</a> <a href="{% url 'student-delete' item.id classroom.id %}" class="btn" style="background-color: #FFA500; color: #000034;">Delete</a></td>
+      {% endif %}
   </tr>
     {% endfor %}
     </table>
