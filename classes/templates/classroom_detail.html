@@ -8,8 +8,25 @@
   <div class="card-body">
     <h5 class="card-title" style="color: 000034;">{{classroom.name}} {{classroom.subject}}</h5>
     <p class="card-text" style="color: 000034;">{{classroom.year}}</p>
+
+
+    <table class="table">
+    	
+	{% for item in classroom.students.all %}
+	<tr>
+      <td> name : {{item.name}} </td>
+      <td> date of birth :{{item.date_of_birth}} </td>
+      <td> GENDER :{{item.gender}} </td>
+      <td> Exam Grade : {{item.exam_grade}} </td>
+      <td> <a href="{% url 'student-update' item.id classroom.id %}" class="btn" style="background-color: #000034; color: white;">Update</a> <a href="{% url 'student-delete' item.id classroom.id %}" class="btn" style="background-color: #FFA500; color: #000034;">Delete</a></td>
+  </tr>
+    {% endfor %}
+    </table>
+    {% if classroom.teacher == request.user %}
     <a href="{% url 'classroom-update' classroom.id %}" class="btn" style="background-color: #000034; color: white;">Update</a>
     <a href="{% url 'classroom-delete' classroom.id %}" class="btn" style="background-color: #FFA500; color: #000034;">Delete</a>
+    <a href="{% url 'student-create' classroom.id %}" class="btn" style="background-color: #FFA500; color: #000034;">Add Student</a>	
+    {% endif %}
   </div>
 </div>
 
